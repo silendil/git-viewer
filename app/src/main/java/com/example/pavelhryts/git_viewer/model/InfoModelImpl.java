@@ -18,9 +18,9 @@ public class InfoModelImpl implements InfoModel {
             public Observable<String> call(Long aLong) {
                 Observable<String> result;
                 double random = Math.random();
-                if (random > 0.5 && random < 0.75) {
+                if (random >= 0.5 && random < 0.75) {
                     result = Observable.just(FUBAR);
-                } else if (random > 0.75) {
+                } else if (random >= 0.75) {
                     result = Observable.just(SUSFU);
                 } else {
                     result = Observable.error(new IllegalStateException(BOHICA));
