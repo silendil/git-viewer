@@ -1,5 +1,6 @@
 package com.example.pavelhryts.git_viewer.model;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -16,17 +17,16 @@ public class InfoModelImpl implements InfoModel {
         return Observable.timer(1L, TimeUnit.SECONDS).flatMap(new Func1<Long, Observable<String>>() {
             @Override
             public Observable<String> call(Long aLong) {
-                Observable<String> result;
-                double random = Math.random();
-                if (random >= 0.5 && random < 0.75) {
-                    result = Observable.just(FUBAR);
-                } else if (random >= 0.75) {
-                    result = Observable.just(SUSFU);
-                } else {
-                    result = Observable.error(new IllegalStateException(BOHICA));
-                }
-                return result;
+                return Observable.from(generateString(20));
             }
         });
+    }
+
+    private String[] generateString(int length){
+        String[] array = new String[length];
+        for(int i = 0; i < length; i++){
+            array[i] = String.format(Locale.US, "line %d",i+1);
+        }
+        return array;
     }
 }
